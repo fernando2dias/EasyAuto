@@ -4,10 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
 class AppTextStyles {
-  static final TextStyle title = GoogleFonts.notoSans(
-    color: AppColors.white,
-    fontSize: 20,
-    fontWeight: FontWeight.w400,
+  static final TextStyle title = GoogleFonts.roboto(
+    color: AppColors.black,
+    fontSize: 18,
+    fontWeight: FontWeight.w700,
   );
 
   static final TextStyle titleBold = GoogleFonts.notoSans(
@@ -83,5 +83,11 @@ class AppTextStyles {
     color: AppColors.grey,
     fontSize: 11,
     fontWeight: FontWeight.normal,
+  );
+
+  static final TextStyle buttons = GoogleFonts.roboto(
+    color: AppColors.black,
+    fontSize: 18,
+    fontWeight: FontWeight.w700,
   );
 }
