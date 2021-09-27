@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_easy_auto/core/app_text_styles.dart';
 import 'package:flutter_easy_auto/core/core.dart';
+import 'package:flutter_easy_auto/provider/google_sign_in.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -20,6 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final passwordController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       body: isLoading
           ? Center(
@@ -88,15 +93,25 @@ class _LoginScreenState extends State<LoginScreen> {
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
+                            child: ElevatedButton.icon(
                               style: ElevatedButton.styleFrom(
                                 primary: Color.fromRGBO(196, 196, 196, 0.5),
                               ),
-                              onPressed: () {},
-                              child: Text(
-                                'CADASTRAR',
+                              icon: FaIcon(
+                                FontAwesomeIcons.google,
+                                color: Colors.red,
+                              ),
+                              label: Text(
+                                'Login Google',
                                 style: AppTextStyles.buttons,
                               ),
+                              onPressed: () {
+                                final provider =
+                                    Provider.of<GoogleSignInProvider>(context,
+                                        listen: false);
+                                provider.googleLogin();
+                                print(user.email);
+                              },
                             ),
                           ),
                         ),

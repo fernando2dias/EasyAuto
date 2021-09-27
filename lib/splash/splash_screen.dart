@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_auto/core/core.dart';
+import 'package:flutter_easy_auto/interface/interface.dart';
 import 'package:flutter_easy_auto/login/login_screen.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -43,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
           .then((value) => Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => LoginScreen(),
+                  builder: (context) => InterfaceScreen(),
                 ),
               ));
     });
