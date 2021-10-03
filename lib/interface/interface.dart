@@ -26,7 +26,8 @@ class _InterfaceStateScreen extends State<InterfaceScreen> {
             child: Text('Algo de errado nao esta certo'),
           );
         } else {
-          return LoginScreen();
+          //return LoginScreen();
+          return HomeScreen();
         }
       },
     ));
