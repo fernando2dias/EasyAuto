@@ -13,6 +13,7 @@ class _SignInScreenState extends State<SignInScreen> {
   bool _passwordObscure = true;
   final usernameController = new TextEditingController();
   final passwordController = new TextEditingController();
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -211,6 +212,124 @@ class _SignInScreenState extends State<SignInScreen> {
                       fontFamily: "Poppins",
                     ),
                   ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Esqueci minha senha',
+                      style: TextStyle(decoration: TextDecoration.underline),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Checkbox(
+                            value: isChecked,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                isChecked = !isChecked;
+                              });
+                            }),
+                      ),
+                      Expanded(
+                        flex: 9,
+                        child: Text(
+                          'Aceito os termos estabelecidos pelo aplicativo.',
+                          style:
+                              TextStyle(decoration: TextDecoration.underline),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 7.5),
+                          child: SizedBox(
+                            height: 50,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Color.fromRGBO(64, 33, 78, 0.35),
+                              ),
+                              child: Text(
+                                'LIMPAR',
+                                style: AppTextStyles.signInButton,
+                              ),
+                              onPressed: () {
+                                Future.delayed(Duration(seconds: 3))
+                                    .then((value) => Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                SignInScreen(),
+                                          ),
+                                        ));
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 7.5),
+                          child: SizedBox(
+                            height: 50,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Color(0xFF40214E),
+                              ),
+                              onPressed: () {
+                                print("Clicou em Entrar");
+                              },
+                              child: Text(
+                                'CADASTRAR',
+                                style: AppTextStyles.logInButton,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 7.5),
+                      child: SizedBox(
+                        height: 63,
+                        child: ElevatedButton(
+                            style:
+                                ElevatedButton.styleFrom(primary: Colors.white),
+                            onPressed: () {},
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.arrow_forward_ios_outlined,
+                                  color: Colors.black,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: Text(
+                                    "Veja como funciona",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 18),
+                                  ),
+                                ),
+                              ],
+                            )),
+                      )),
                 ),
               ],
             );
