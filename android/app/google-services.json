@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "762192241061",
+    "project_id": "easy-auto-eng-sftw",
+    "storage_bucket": "easy-auto-eng-sftw.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:762192241061:android:679817e180f4e304b9084c",
+        "android_client_info": {
+          "package_name": "com.example.flutter_easy_auto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "762192241061-mvqk8uflpqdoeklqvlmer3qenkphdv5e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwrtbwWZ0PBqX4dD8pLIcgfCPEon4OC4A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "762192241061-mvqk8uflpqdoeklqvlmer3qenkphdv5e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
