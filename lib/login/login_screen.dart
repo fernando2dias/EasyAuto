@@ -1,11 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_easy_auto/core/app_text_styles.dart';
 import 'package:flutter_easy_auto/core/core.dart';
 import 'package:flutter_easy_auto/provider/google_sign_in.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_easy_auto/signin/signin_screen.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -24,123 +26,168 @@ class _LoginScreenState extends State<LoginScreen> {
   final passwordController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
+    double width = MediaQuery.of(context).size.width;
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Scaffold(
+      backgroundColor: Colors.white,
       body: isLoading
           ? Center(
               child: CircularProgressIndicator(),
             )
           : Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      'EasyAuto',
-                      style: AppTextStyles.title,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: TextFormField(
-                      controller: usernameController,
-                      decoration: InputDecoration(
-                          labelText: "Login",
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(),
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: SizedBox(
+                            height: 49,
+                            child: SvgPicture.asset('assets/brand/brand.svg')),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: TextFormField(
+                          controller: usernameController,
+                          decoration: InputDecoration(
+                              labelText: "Login",
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5),
+                                borderSide: BorderSide(),
+                              ),
+                              suffixIcon: Icon(Icons.person)),
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(
+                            fontFamily: "Poppins",
                           ),
-                          suffixIcon: Icon(Icons.person)),
-                      keyboardType: TextInputType.text,
-                      style: TextStyle(
-                        fontFamily: "Poppins",
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: TextFormField(
-                      controller: passwordController,
-                      obscureText: _passwordObscure,
-                      decoration: InputDecoration(
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            _passwordObscure = !_passwordObscure;
-                            setState(() {});
-                          },
-                          icon: Icon(
-                              _passwordObscure ? Icons.lock : Icons.lock_open),
-                        ),
-                        labelText: "Senha",
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(),
                         ),
                       ),
-                      keyboardType: TextInputType.text,
-                      style: TextStyle(
-                        fontFamily: "Poppins",
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: TextFormField(
+                          controller: passwordController,
+                          obscureText: _passwordObscure,
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                _passwordObscure = !_passwordObscure;
+                                setState(() {});
+                              },
+                              icon: Icon(_passwordObscure
+                                  ? Icons.lock
+                                  : Icons.lock_open),
+                            ),
+                            labelText: "Senha",
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5),
+                              borderSide: BorderSide(),
+                            ),
+                          ),
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton.icon(
-                              style: ElevatedButton.styleFrom(
-                                primary: Color.fromRGBO(196, 196, 196, 0.5),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 7.5),
+                                child: SizedBox(
+                                  height: 50,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Color.fromRGBO(64, 33, 78, 0.35),
+                                    ),
+                                    child: Text(
+                                      'CADASTRAR',
+                                      style: AppTextStyles.signInButton,
+                                    ),
+                                    onPressed: () {
+                                      Future.delayed(Duration(seconds: 3)).then(
+                                          (value) => Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SignInScreen(),
+                                                ),
+                                              ));
+                                    },
+                                  ),
+                                ),
                               ),
-                              icon: FaIcon(
-                                FontAwesomeIcons.google,
-                                color: Colors.red,
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 7.5),
+                                child: SizedBox(
+                                  height: 50,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Color(0xFF40214E),
+                                    ),
+                                    onPressed: () {
+                                      print("Clicou em Entrar");
+                                    },
+                                    child: Text(
+                                      'ENTRAR',
+                                      style: AppTextStyles.logInButton,
+                                    ),
+                                  ),
+                                ),
                               ),
-                              label: Text(
-                                'Login Google',
-                                style: AppTextStyles.buttons,
-                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          'Esqueci minha senha',
+                          style:
+                              TextStyle(decoration: TextDecoration.underline),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                        child: Divider(
+                          color: Colors.black,
+                        ),
+                      ),
+                      Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SizedBox(
+                            height: 53,
+                            width: (width - 80),
+                            child: SignInButton(
+                              Buttons.Google,
+                              text: "Entrar com Google",
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 82.0),
                               onPressed: () {
                                 final provider =
                                     Provider.of<GoogleSignInProvider>(context,
                                         listen: false);
                                 provider.googleLogin();
-                                print(user.email);
                               },
                             ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Color(0xFFC4C4C4),
-                              ),
-                              onPressed: () {},
-                              child: Text(
-                                'ENTRAR',
-                                style: AppTextStyles.buttons,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      'Esqueci minha senha',
-                      style: TextStyle(decoration: TextDecoration.underline),
-                    ),
-                  )
-                ],
+                          )),
+                    ],
+                  );
+                },
+                itemCount: 1,
               ),
             ),
     );
