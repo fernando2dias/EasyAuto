@@ -85,9 +85,21 @@ class AppTextStyles {
     fontWeight: FontWeight.normal,
   );
 
-  static final TextStyle buttons = GoogleFonts.roboto(
+  static final TextStyle signInButton = GoogleFonts.roboto(
     color: AppColors.black,
     fontSize: 18,
     fontWeight: FontWeight.w700,
+  );
+
+  static final TextStyle logInButton = GoogleFonts.roboto(
+    color: AppColors.white,
+    fontSize: 18,
+    fontWeight: FontWeight.w700,
+  );
+
+  static final TextStyle googleButton = GoogleFonts.roboto(
+    color: AppColors.black,
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
   );
 }
