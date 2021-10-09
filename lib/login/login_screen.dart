@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_easy_auto/core/app_text_styles.dart';
 import 'package:flutter_easy_auto/core/core.dart';
-import 'package:flutter_easy_auto/provider/google_sign_in.dart';
+import 'package:flutter_easy_auto/provider/login_provider.dart';
 import 'package:flutter_easy_auto/signin/signin_screen.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -115,14 +115,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                       style: AppTextStyles.signInButton,
                                     ),
                                     onPressed: () {
-                                      Future.delayed(Duration(seconds: 3)).then(
-                                          (value) => Navigator.pushReplacement(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SignInScreen(),
-                                                ),
-                                              ));
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => SignInScreen(),
+                                        ),
+                                      );
                                     },
                                   ),
                                 ),
@@ -140,6 +138,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                     onPressed: () {
                                       print("Clicou em Entrar");
+                                      authLogin(usernameController.text,
+                                          passwordController.text);
                                     },
                                     child: Text(
                                       'ENTRAR',
@@ -177,9 +177,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 82.0),
                               onPressed: () {
-                                final provider =
-                                    Provider.of<GoogleSignInProvider>(context,
-                                        listen: false);
+                                final provider = Provider.of<LoginProvider>(
+                                    context,
+                                    listen: false);
                                 provider.googleLogin();
                               },
                             ),
@@ -191,5 +191,12 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
     );
+  }
+
+  authLogin(String email, String password) async {
+    print(email);
+    print(password);
+    final provider = Provider.of<LoginProvider>(context, listen: false);
+    provider.emailLogin(email, password);
   }
 }

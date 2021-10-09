@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_auto/core/app_text_styles.dart';
+import 'package:flutter_easy_auto/login/login_screen.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -13,6 +15,16 @@ class _SignInScreenState extends State<SignInScreen> {
   bool _passwordObscure = true;
   final usernameController = new TextEditingController();
   final passwordController = new TextEditingController();
+
+  final emailController = new TextEditingController();
+  final cellphoneController = new TextEditingController();
+
+  final cpfController = new TextEditingController();
+  final carController = new TextEditingController();
+
+  final plateController = new TextEditingController();
+  final repeatPasswordController = new TextEditingController();
+
   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
@@ -72,7 +84,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: TextFormField(
-                    controller: usernameController,
+                    controller: emailController,
                     decoration: InputDecoration(
                         labelText: "E-mail",
                         fillColor: Colors.white,
@@ -90,7 +102,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: TextFormField(
-                    controller: usernameController,
+                    controller: cellphoneController,
                     decoration: InputDecoration(
                         labelText: "Telefone / Celular",
                         fillColor: Colors.white,
@@ -108,7 +120,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: TextFormField(
-                    controller: usernameController,
+                    controller: cpfController,
                     decoration: InputDecoration(
                         labelText: "CPF",
                         fillColor: Colors.white,
@@ -126,7 +138,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: TextFormField(
-                    controller: usernameController,
+                    controller: carController,
                     decoration: InputDecoration(
                         labelText: "Marca e Modelo do veículo",
                         fillColor: Colors.white,
@@ -144,7 +156,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: TextFormField(
-                    controller: usernameController,
+                    controller: plateController,
                     decoration: InputDecoration(
                         labelText: "Placa",
                         fillColor: Colors.white,
@@ -189,7 +201,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: TextFormField(
-                    controller: passwordController,
+                    controller: repeatPasswordController,
                     obscureText: _passwordObscure,
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
@@ -267,14 +279,12 @@ class _SignInScreenState extends State<SignInScreen> {
                                 style: AppTextStyles.signInButton,
                               ),
                               onPressed: () {
-                                Future.delayed(Duration(seconds: 3))
-                                    .then((value) => Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                SignInScreen(),
-                                          ),
-                                        ));
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => LoginScreen(),
+                                  ),
+                                );
                               },
                             ),
                           ),
@@ -291,6 +301,8 @@ class _SignInScreenState extends State<SignInScreen> {
                               ),
                               onPressed: () {
                                 print("Clicou em Entrar");
+                                authSignIn(emailController.text,
+                                    passwordController.text);
                               },
                               child: Text(
                                 'CADASTRAR',
@@ -336,6 +348,42 @@ class _SignInScreenState extends State<SignInScreen> {
           },
           itemCount: 1,
         ),
+      ),
+    );
+  }
+
+  authSignIn(String email, String password) async {
+    print(email);
+    print(password);
+    FirebaseAuth _auth = FirebaseAuth.instance;
+    try {
+      await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LoginScreen(),
+        ),
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        _showToast(context, 'Senha muito fraca');
+      } else if (e.code == 'email-already-in-use') {
+        _showToast(context, 'E-mail já cadastrado. Tente novamente');
+      } else {
+        // print(e.code);
+        _showToast(context, 'Ocorreu um erro. Tente novamente');
+      }
+    }
+  }
+
+  void _showToast(BuildContext context, String text) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text(text),
+        action: SnackBarAction(
+            label: 'Ok', onPressed: scaffold.hideCurrentSnackBar),
       ),
     );
   }
