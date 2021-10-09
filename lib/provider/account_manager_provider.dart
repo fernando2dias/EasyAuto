@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class LoginProvider extends ChangeNotifier {
+class AccountManagerProvider extends ChangeNotifier {
   final googleSignIn = GoogleSignIn();
 
   GoogleSignInAccount? _user;
@@ -26,20 +26,39 @@ class LoginProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> emailLogin(String email, String password) async {
+  Future<String> emailLogin(String email, String password) async {
     FirebaseAuth _auth = FirebaseAuth.instance;
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-      print(FirebaseAuth.instance.currentUser?.uid);
+      notifyListeners();
+      return 'success';
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('Usuário não encontrado');
+        return 'Usuário não encontrado';
       } else if (e.code == 'wrong-password') {
-        print('E-mail ou senha incorreto. Tente novamente');
+        return 'E-mail ou senha incorreto. Tente novamente';
       } else {
-        print('Ocorreu um erro. Tente novamente');
+        return 'Ocorreu um erro. Tente novamente';
       }
     }
-    notifyListeners();
+  }
+
+  Future<String> emailSignIn(String email, String password) async {
+    FirebaseAuth _auth = FirebaseAuth.instance;
+    try {
+      await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      notifyListeners();
+      return 'success';
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        return 'Senha muito fraca';
+      } else if (e.code == 'email-already-in-use') {
+        return 'E-mail já cadastrado. Tente novamente';
+      } else {
+        // print(e.code);
+        return 'Ocorreu um erro. Tente novamente';
+      }
+    }
   }
 }

@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easy_auto/core/app_restart.dart';
 import 'package:flutter_easy_auto/core/app_text_styles.dart';
+import 'package:flutter_easy_auto/home/home_screen.dart';
 import 'package:flutter_easy_auto/login/login_screen.dart';
+import 'package:flutter_easy_auto/provider/account_manager_provider.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -63,24 +66,24 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: TextFormField(
-                    controller: usernameController,
-                    decoration: InputDecoration(
-                        labelText: "Usuário",
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide: BorderSide(),
-                        ),
-                        suffixIcon: Icon(Icons.person)),
-                    keyboardType: TextInputType.text,
-                    style: TextStyle(
-                      fontFamily: "Poppins",
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.all(16.0),
+                //   child: TextFormField(
+                //     controller: usernameController,
+                //     decoration: InputDecoration(
+                //         labelText: "Usuário",
+                //         fillColor: Colors.white,
+                //         border: OutlineInputBorder(
+                //           borderRadius: BorderRadius.circular(5),
+                //           borderSide: BorderSide(),
+                //         ),
+                //         suffixIcon: Icon(Icons.person)),
+                //     keyboardType: TextInputType.text,
+                //     style: TextStyle(
+                //       fontFamily: "Poppins",
+                //     ),
+                //   ),
+                // ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: TextFormField(
@@ -99,78 +102,78 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: TextFormField(
-                    controller: cellphoneController,
-                    decoration: InputDecoration(
-                        labelText: "Telefone / Celular",
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide: BorderSide(),
-                        ),
-                        suffixIcon: Icon(Icons.person)),
-                    keyboardType: TextInputType.text,
-                    style: TextStyle(
-                      fontFamily: "Poppins",
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: TextFormField(
-                    controller: cpfController,
-                    decoration: InputDecoration(
-                        labelText: "CPF",
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide: BorderSide(),
-                        ),
-                        suffixIcon: Icon(Icons.person)),
-                    keyboardType: TextInputType.text,
-                    style: TextStyle(
-                      fontFamily: "Poppins",
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: TextFormField(
-                    controller: carController,
-                    decoration: InputDecoration(
-                        labelText: "Marca e Modelo do veículo",
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide: BorderSide(),
-                        ),
-                        suffixIcon: Icon(Icons.person)),
-                    keyboardType: TextInputType.text,
-                    style: TextStyle(
-                      fontFamily: "Poppins",
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: TextFormField(
-                    controller: plateController,
-                    decoration: InputDecoration(
-                        labelText: "Placa",
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide: BorderSide(),
-                        ),
-                        suffixIcon: Icon(Icons.person)),
-                    keyboardType: TextInputType.text,
-                    style: TextStyle(
-                      fontFamily: "Poppins",
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.all(16.0),
+                //   child: TextFormField(
+                //     controller: cellphoneController,
+                //     decoration: InputDecoration(
+                //         labelText: "Telefone / Celular",
+                //         fillColor: Colors.white,
+                //         border: OutlineInputBorder(
+                //           borderRadius: BorderRadius.circular(5),
+                //           borderSide: BorderSide(),
+                //         ),
+                //         suffixIcon: Icon(Icons.person)),
+                //     keyboardType: TextInputType.text,
+                //     style: TextStyle(
+                //       fontFamily: "Poppins",
+                //     ),
+                //   ),
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.all(16.0),
+                //   child: TextFormField(
+                //     controller: cpfController,
+                //     decoration: InputDecoration(
+                //         labelText: "CPF",
+                //         fillColor: Colors.white,
+                //         border: OutlineInputBorder(
+                //           borderRadius: BorderRadius.circular(5),
+                //           borderSide: BorderSide(),
+                //         ),
+                //         suffixIcon: Icon(Icons.person)),
+                //     keyboardType: TextInputType.text,
+                //     style: TextStyle(
+                //       fontFamily: "Poppins",
+                //     ),
+                //   ),
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.all(16.0),
+                //   child: TextFormField(
+                //     controller: carController,
+                //     decoration: InputDecoration(
+                //         labelText: "Marca e Modelo do veículo",
+                //         fillColor: Colors.white,
+                //         border: OutlineInputBorder(
+                //           borderRadius: BorderRadius.circular(5),
+                //           borderSide: BorderSide(),
+                //         ),
+                //         suffixIcon: Icon(Icons.person)),
+                //     keyboardType: TextInputType.text,
+                //     style: TextStyle(
+                //       fontFamily: "Poppins",
+                //     ),
+                //   ),
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.all(16.0),
+                //   child: TextFormField(
+                //     controller: plateController,
+                //     decoration: InputDecoration(
+                //         labelText: "Placa",
+                //         fillColor: Colors.white,
+                //         border: OutlineInputBorder(
+                //           borderRadius: BorderRadius.circular(5),
+                //           borderSide: BorderSide(),
+                //         ),
+                //         suffixIcon: Icon(Icons.person)),
+                //     keyboardType: TextInputType.text,
+                //     style: TextStyle(
+                //       fontFamily: "Poppins",
+                //     ),
+                //   ),
+                // ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: TextFormField(
@@ -300,9 +303,18 @@ class _SignInScreenState extends State<SignInScreen> {
                                 primary: Color(0xFF40214E),
                               ),
                               onPressed: () {
-                                print("Clicou em Entrar");
-                                authSignIn(emailController.text,
-                                    passwordController.text);
+                                if (isChecked &&
+                                    (passwordController.text ==
+                                        repeatPasswordController.text)) {
+                                  authSignIn(emailController.text,
+                                      passwordController.text);
+                                } else if (passwordController.text !=
+                                    repeatPasswordController.text) {
+                                  _showToast(context, 'Senhas não são iguais');
+                                } else if (!isChecked) {
+                                  _showToast(context,
+                                      'É necessário aceitar os termos');
+                                }
                               },
                               child: Text(
                                 'CADASTRAR',
@@ -353,27 +365,19 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   authSignIn(String email, String password) async {
-    print(email);
-    print(password);
-    FirebaseAuth _auth = FirebaseAuth.instance;
-    try {
-      await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => LoginScreen(),
-        ),
-      );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        _showToast(context, 'Senha muito fraca');
-      } else if (e.code == 'email-already-in-use') {
-        _showToast(context, 'E-mail já cadastrado. Tente novamente');
-      } else {
-        // print(e.code);
-        _showToast(context, 'Ocorreu um erro. Tente novamente');
-      }
+    AccountManagerProvider _accountManagerProvider =
+        new AccountManagerProvider();
+    String result = await _accountManagerProvider.emailSignIn(email, password);
+    if (result != 'success') {
+      _showToast(context, result);
+    } else {
+      RestartWidget.restartApp(context);
+      // Navigator.pushReplacement(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => HomeScreen(),
+      //   ),
+      // );
     }
   }
 
