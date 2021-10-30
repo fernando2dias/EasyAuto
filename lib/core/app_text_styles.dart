@@ -102,4 +102,22 @@ class AppTextStyles {
     fontSize: 14,
     fontWeight: FontWeight.w400,
   );
+
+  static final TextStyle bodyRoboto = GoogleFonts.roboto(
+    color: AppColors.black,
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+  );
+
+  static final TextStyle titleRoboto = GoogleFonts.roboto(
+    color: AppColors.black,
+    fontSize: 24,
+    fontWeight: FontWeight.w700,
+  );
+
+  static final TextStyle backWhiteRoboto = GoogleFonts.roboto(
+    color: AppColors.white,
+    fontSize: 18,
+    fontWeight: FontWeight.w700,
+  );
 }

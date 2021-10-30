@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_auto/core/app_restart.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_easy_auto/home/home_screen.dart';
 import 'package:flutter_easy_auto/login/login_screen.dart';
 import 'package:flutter_easy_auto/provider/account_manager_provider.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInScreen extends StatefulWidget {
   SignInScreen({Key? key}) : super(key: key);

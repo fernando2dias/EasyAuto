@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_auto/core/core.dart';
-import 'package:flutter_easy_auto/interface/interface.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_easy_auto/userdata/user_data.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -46,7 +46,8 @@ class _SplashScreenState extends State<SplashScreen> {
           .then((value) => Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => InterfaceScreen(),
+                  // builder: (context) => InterfaceScreen(),
+                  builder: (context) => UserData(),
                 ),
               ));
     });

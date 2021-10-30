@@ -58,6 +58,8 @@ flutter:
     - assets/
     - assets/brand/brand.svg
     - assets/brand/brand_white.svg
+    - assets/how_it_works/close-up-hands-of-unrecognizable-mechanic-doing-car-service-and-maintenance.png
+    - assets/how_it_works/woman-near-broken-car-call-for-help.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

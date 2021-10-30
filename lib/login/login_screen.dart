@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,9 +25,9 @@ class _LoginScreenState extends State<LoginScreen> {
   final bool isSignIn = false;
   final bool google = false;
   final bool isLoading = false;
-  bool _passwordObscure = true;
-  final usernameController = new TextEditingController();
-  final passwordController = new TextEditingController();
+  // bool _passwordObscure = true;
+  // final usernameController = new TextEditingController();
+  // final passwordController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -51,6 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 49,
                             child: SvgPicture.asset('assets/brand/brand.svg')),
                       ),
+                      /*
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Form(
@@ -169,6 +172,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               RestartWidget.restartApp(context);
                             }),
                       ),
+                      */
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 40.0),
                         child: Divider(
@@ -202,37 +206,37 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  authLogin(String email, String password) async {
-    print(email);
-    print(password);
-    final provider =
-        Provider.of<AccountManagerProvider>(context, listen: false);
-    String result = await provider.emailLogin(email, password);
-    if (result != 'success') {
-      _showToast(context, result);
-    }
-  }
+  // authLogin(String email, String password) async {
+  //   print(email);
+  //   print(password);
+  //   final provider =
+  //       Provider.of<AccountManagerProvider>(context, listen: false);
+  //   String result = await provider.emailLogin(email, password);
+  //   if (result != 'success') {
+  //     _showToast(context, result);
+  //   }
+  // }
 
-  void _showToast(BuildContext context, String text) {
-    final scaffold = ScaffoldMessenger.of(context);
-    scaffold.showSnackBar(
-      SnackBar(
-        content: Text(text),
-        action: SnackBarAction(
-            label: 'Ok', onPressed: scaffold.hideCurrentSnackBar),
-      ),
-    );
-  }
+  // void _showToast(BuildContext context, String text) {
+  //   final scaffold = ScaffoldMessenger.of(context);
+  //   scaffold.showSnackBar(
+  //     SnackBar(
+  //       content: Text(text),
+  //       action: SnackBarAction(
+  //           label: 'Ok', onPressed: scaffold.hideCurrentSnackBar),
+  //     ),
+  //   );
+  // }
 
-  String? validateEmail(String? value) {
-    Pattern pattern =
-        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
-        r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
-        r"{0,253}[a-zA-Z0-9])?)*$";
-    RegExp regex = new RegExp(pattern.toString());
-    if (!regex.hasMatch(value ?? '') || value == null)
-      return 'Enter a valid email address';
-    else
-      return null;
-  }
+  // String? validateEmail(String? value) {
+  //   Pattern pattern =
+  //       r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+  //       r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+  //       r"{0,253}[a-zA-Z0-9])?)*$";
+  //   RegExp regex = new RegExp(pattern.toString());
+  //   if (!regex.hasMatch(value ?? '') || value == null)
+  //     return 'Enter a valid email address';
+  //   else
+  //     return null;
+  // }
 }
